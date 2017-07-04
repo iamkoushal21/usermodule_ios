@@ -8,20 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		1C0942E61F051B2300036C3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0942E51F051B2300036C3B /* AppDelegate.swift */; };
-		1C0942E81F051B2300036C3B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0942E71F051B2300036C3B /* ViewController.swift */; };
+		1C0942E81F051B2300036C3B /* FrontPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0942E71F051B2300036C3B /* FrontPageViewController.swift */; };
 		1C0942EB1F051B2300036C3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C0942E91F051B2300036C3B /* Main.storyboard */; };
 		1C0942ED1F051B2300036C3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C0942EC1F051B2300036C3B /* Assets.xcassets */; };
 		1C0942F01F051B2300036C3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C0942EE1F051B2300036C3B /* LaunchScreen.storyboard */; };
+		1C0942F81F052C6100036C3B /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0942F71F052C6100036C3B /* SignInPageViewController.swift */; };
+		1C0942FC1F052D0C00036C3B /* UserDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0942FB1F052D0C00036C3B /* UserDetailPageViewController.swift */; };
+		1C0942FE1F052D4B00036C3B /* ForgotPassWordPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0942FD1F052D4B00036C3B /* ForgotPassWordPageViewController.swift */; };
+		1C0943011F05513A00036C3B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0943001F05513A00036C3B /* SignUpViewController.swift */; };
+		1C0943031F06203F00036C3B /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0943021F06203F00036C3B /* UserDefaultsKeys.swift */; };
+		1CBEDFD11F0BB71600FD017F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBEDFD01F0BB71500FD017F /* Validation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1C0942E21F051B2300036C3B /* UserModule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserModule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C0942E51F051B2300036C3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1C0942E71F051B2300036C3B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1C0942E71F051B2300036C3B /* FrontPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPageViewController.swift; sourceTree = "<group>"; };
 		1C0942EA1F051B2300036C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1C0942EC1F051B2300036C3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C0942EF1F051B2300036C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C0942F11F051B2300036C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C0942F71F052C6100036C3B /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
+		1C0942FB1F052D0C00036C3B /* UserDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailPageViewController.swift; sourceTree = "<group>"; };
+		1C0942FD1F052D4B00036C3B /* ForgotPassWordPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassWordPageViewController.swift; sourceTree = "<group>"; };
+		1C0943001F05513A00036C3B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		1C0943021F06203F00036C3B /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		1CBEDFD01F0BB71500FD017F /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +67,14 @@
 			isa = PBXGroup;
 			children = (
 				1C0942E51F051B2300036C3B /* AppDelegate.swift */,
-				1C0942E71F051B2300036C3B /* ViewController.swift */,
+				1C0942E71F051B2300036C3B /* FrontPageViewController.swift */,
 				1C0942E91F051B2300036C3B /* Main.storyboard */,
+				1C0943001F05513A00036C3B /* SignUpViewController.swift */,
+				1C0943021F06203F00036C3B /* UserDefaultsKeys.swift */,
+				1C0942FD1F052D4B00036C3B /* ForgotPassWordPageViewController.swift */,
+				1C0942FB1F052D0C00036C3B /* UserDetailPageViewController.swift */,
+				1C0942F71F052C6100036C3B /* SignInPageViewController.swift */,
+				1CBEDFD01F0BB71500FD017F /* Validation.swift */,
 				1C0942EC1F051B2300036C3B /* Assets.xcassets */,
 				1C0942EE1F051B2300036C3B /* LaunchScreen.storyboard */,
 				1C0942F11F051B2300036C3B /* Info.plist */,
@@ -135,8 +153,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C0942E81F051B2300036C3B /* ViewController.swift in Sources */,
+				1C0943011F05513A00036C3B /* SignUpViewController.swift in Sources */,
+				1C0943031F06203F00036C3B /* UserDefaultsKeys.swift in Sources */,
+				1C0942F81F052C6100036C3B /* SignInPageViewController.swift in Sources */,
+				1C0942E81F051B2300036C3B /* FrontPageViewController.swift in Sources */,
 				1C0942E61F051B2300036C3B /* AppDelegate.swift in Sources */,
+				1C0942FE1F052D4B00036C3B /* ForgotPassWordPageViewController.swift in Sources */,
+				1CBEDFD11F0BB71600FD017F /* Validation.swift in Sources */,
+				1C0942FC1F052D0C00036C3B /* UserDetailPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +295,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = MMBDR3PA6L;
 				INFOPLIST_FILE = UserModule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.7rcksh.UserModule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -285,6 +310,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = MMBDR3PA6L;
 				INFOPLIST_FILE = UserModule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.7rcksh.UserModule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -312,6 +338,7 @@
 				1C0942F61F051B2300036C3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
