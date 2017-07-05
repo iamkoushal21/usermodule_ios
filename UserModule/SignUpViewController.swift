@@ -14,6 +14,7 @@ enum SignUpAlertType {
     case alreadySignedUp
     case successfullySignedUp
     case fillAllTheFieldsFirst
+    case emailNotValid
     
     
     var title: String {
@@ -28,7 +29,8 @@ enum SignUpAlertType {
             return "Successfully Signed Up"
         case .fillAllTheFieldsFirst:
             return "First Fill All The Fields"
-            
+        case .emailNotValid:
+            return "Email Id is not valid"
         }
     }
     
@@ -44,6 +46,8 @@ enum SignUpAlertType {
             return "Now you can login from home page"
         case .fillAllTheFieldsFirst:
             return "All fields are mandatory to fill"
+        case .emailNotValid:
+            return nil
             
         }
     }
@@ -74,7 +78,7 @@ class SignUpViewController: UIViewController {
         }
     }
     @IBOutlet weak var confirmPasswordTextField: UITextField! {
-        didSet{
+        didSet {
             confirmPasswordTextField.isEnabled = false
             confirmPasswordTextField.delegate = self
         }
@@ -100,7 +104,7 @@ class SignUpViewController: UIViewController {
     var confirmPassword: String {
         return confirmPasswordTextField.text ?? ""
     }
-    
+    var firstPageAfterSignUpSegue: String = "FirstPageAfterSignUp"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +114,6 @@ class SignUpViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
@@ -128,7 +131,7 @@ class SignUpViewController: UIViewController {
                 let alertController = UIAlertController(title: "You are successfully Signed Up", message: nil, preferredStyle: .alert )
                 let okay = UIAlertAction(title: "Okay", style: .cancel) { _ in
                     UserDefaults.standard.set(userInfo, forKey: self.emailId)
-                    self.performSegue(withIdentifier: "FirstPageAfterSignUp", sender: nil)
+                    self.performSegue(withIdentifier: self.firstPageAfterSignUpSegue, sender: nil)
                 }
                 alertController.addAction(okay)
                 present(alertController, animated: true, completion: nil )
@@ -139,17 +142,11 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == confirmPasswordTextField, password.isEmpty {
-            showAlertViewController(title: "Enter First Above Password", message: nil)
-        }
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         let emailValidation = validateEmail(emailId)
         if textField == emailIdTextField, emailValidation == false, emailId.count >= 1 {
                 alertIndicatorOnTextField(textField: emailIdTextField)
-                showAlertViewController(title: "Enter Valid Email Address", message: nil)
+            showAlertViewController(alert: .emailNotValid)
             } else if emailValidation == true {
                 emailValidationFlag = true
                 emailIdTextField.rightViewMode = .never
@@ -157,14 +154,14 @@ extension SignUpViewController: UITextFieldDelegate {
         if textField == passwordTextField {
             let passwordValidation = validatePassword(password)
             if passwordValidation  == false {
-                showAlertViewController(title: "Choose Correct Password", message: "Password must have min 8 and max 9 character")
+                showAlertViewController(alert: .passwordNotValid)
             } else {
                 confirmPasswordTextField.isEnabled = true
                 passwordValidationFlag = true
             }
         }
         if textField == confirmPasswordTextField, password != confirmPassword, confirmPassword.count >= 1 {
-                showAlertViewController(title: "Enter Same Password", message: "Password and Confirm Password are not same")
+            showAlertViewController(alert: .passwordNotMatch)
                 alertIndicatorOnTextField(textField: passwordTextField)
             }
         if passwordTextField.text == confirmPassword, passwordValidationFlag == true, emailValidationFlag == true, firstName.isEmpty == false, lastName.isEmpty == false {
