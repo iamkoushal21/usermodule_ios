@@ -9,25 +9,41 @@
 import Foundation
 import UIKit
 
-func validatePassword(_ password: String) -> Bool {
-    let passRegex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%*]).{8,32}$"
-    let passwordPredicate = NSPredicate(format:"SELF MATCHES %@", passRegex)
-    return passwordPredicate.evaluate(with: password)
+enum Regex {
+    case password
+    case email
+    
+    var format: String {
+        switch self {
+        case .password:
+            return "^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%*]).{8,32}$"
+        case .email:
+            return "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        }
+    }
+    
+    func validate(_ string: String) -> Bool {
+        let predicate = NSPredicate(format:"SELF MATCHES %@", self.format)
+        return predicate.evaluate(with: string)
+    }
 }
 
-func validateEmail(_ email:String) -> Bool {
-    if email.isEmpty { return false }
-    let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-    return emailPredicate.evaluate(with: email)
-}
-
-
-func alertIndicatorOnTextField(textField: UITextField) {
-    let alertIndicator = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-    alertIndicator.image = #imageLiteral(resourceName: "logowithborderNBGGGHGVHJG")
-    textField.rightView = alertIndicator
-    textField.rightViewMode = .always
+struct Validation {
+    static func validatePassword(_ password: String) -> Bool {
+        return Regex.password.validate(password)
+    }
+    
+    static func validateEmail(_ email: String) -> Bool {
+        if email.isEmpty { return false }
+        return Regex.email.validate(email)
+    }
+    
+    static func alertIndicatorOnTextField(textField: UITextField) {
+        let alertIndicator = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        alertIndicator.image = #imageLiteral(resourceName: "logowithborderNBGGGHGVHJG")
+        textField.rightView = alertIndicator
+        textField.rightViewMode = .always
+    }
 }
 
 extension UIViewController {

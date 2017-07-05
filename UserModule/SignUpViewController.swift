@@ -11,18 +11,21 @@ import UIKit
 enum SignUpAlertType {
     case passwordNotMatch
     case passwordNotValid
+    case signUpFirst
     case alreadySignedUp
     case successfullySignedUp
     case fillAllTheFieldsFirst
     case emailNotValid
-    
+    case emailOrPasswordNotCorrect
     
     var title: String {
         switch self {
         case .passwordNotMatch:
-            return "Password "
+            return "Password"
         case .passwordNotValid:
             return "Invalid"
+        case .signUpFirst:
+            return "Pease Sign Up First"
         case .alreadySignedUp:
             return "You Already Signed Up"
         case .successfullySignedUp:
@@ -31,6 +34,8 @@ enum SignUpAlertType {
             return "First Fill All The Fields"
         case .emailNotValid:
             return "Email Id is not valid"
+        case .emailOrPasswordNotCorrect:
+            return "Email or Password is not correct"
         }
     }
     
@@ -40,6 +45,8 @@ enum SignUpAlertType {
             return "Password and Confirm Password are not same"
         case .passwordNotValid:
             return "Password should be minimum of 8 and maxinmum of 32 character having 1 special, cap, num character"
+        case .signUpFirst:
+            return nil
         case .alreadySignedUp:
             return nil
         case .successfullySignedUp:
@@ -48,15 +55,41 @@ enum SignUpAlertType {
             return "All fields are mandatory to fill"
         case .emailNotValid:
             return nil
+        case .emailOrPasswordNotCorrect:
+            return nil
             
         }
     }
 }
 
+enum SegueIdentifier: String {
+    case homeToSignUp
+    case homeToSignIn
+    case signUpToHome
+    case signInToUserDetail
+    
+    var identifier: String {
+        switch self {
+        case .homeToSignUp:
+            return "HomeSignUpSegue"
+        case .homeToSignIn:
+            return "HomeSignInSegue"
+        case .signUpToHome:
+            return "SignUpHomeSegue"
+        case .signInToUserDetail:
+            return "SignInUserDetailSegue"
+        }
+    }
+}
+
+struct UserDetail {
+  static  var firstName = "firstName"
+  static  var lastName = "lastName"
+  static  var password = "password"
+}
+
 class SignUpViewController: UIViewController {
     
-    var passwordValidationFlag = false
-    var emailValidationFlag = false
     @IBOutlet weak var firstNameTextField: UITextField! {
         didSet{
             firstNameTextField.delegate = self
@@ -89,6 +122,8 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    var passwordValidationFlag = false
+    var emailValidationFlag = false
     var firstName: String {
         return firstNameTextField.text ?? ""
     }
@@ -104,12 +139,11 @@ class SignUpViewController: UIViewController {
     var confirmPassword: String {
         return confirmPasswordTextField.text ?? ""
     }
-    var firstPageAfterSignUpSegue: String = "FirstPageAfterSignUp"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround()
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,17 +155,17 @@ class SignUpViewController: UIViewController {
         if (firstName.isEmpty == true || lastName.isEmpty == true || emailId.isEmpty == true || password.isEmpty == true || confirmPassword.isEmpty == true) {
             showAlertViewController(alert: .fillAllTheFieldsFirst)
         } else {
-            let userInfo: [String: Any] = ["firstName": firstName,
-                                           "lastName": lastName,
-                                           "password": password,
+            let userDetailsData: [String: Any] = [UserDetail.firstName: firstName,
+                                           UserDetail.lastName: lastName,
+                                           UserDetail.password: password,
                                            ]
             if UserDefaults.standard.value(forKey: emailId) != nil {
                 showAlertViewController(alert: .alreadySignedUp)
             } else {
                 let alertController = UIAlertController(title: "You are successfully Signed Up", message: nil, preferredStyle: .alert )
                 let okay = UIAlertAction(title: "Okay", style: .cancel) { _ in
-                    UserDefaults.standard.set(userInfo, forKey: self.emailId)
-                    self.performSegue(withIdentifier: self.firstPageAfterSignUpSegue, sender: nil)
+                    UserDefaults.standard.set(userDetailsData, forKey: self.emailId)
+                    self.performSegue(identifier: .signUpToHome)
                 }
                 alertController.addAction(okay)
                 present(alertController, animated: true, completion: nil )
@@ -143,27 +177,28 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let emailValidation = validateEmail(emailId)
+        
+        let emailValidation = Validation.validateEmail(emailId)
         if textField == emailIdTextField, emailValidation == false, emailId.count >= 1 {
-                alertIndicatorOnTextField(textField: emailIdTextField)
+                Validation.alertIndicatorOnTextField(textField: emailIdTextField)
             showAlertViewController(alert: .emailNotValid)
             } else if emailValidation == true {
                 emailValidationFlag = true
                 emailIdTextField.rightViewMode = .never
             }
         if textField == passwordTextField {
-            let passwordValidation = validatePassword(password)
-            if passwordValidation  == false {
+            let passwordValidation = Validation.validatePassword(password)
+            if passwordValidation  == false, password.count >= 1 {
                 showAlertViewController(alert: .passwordNotValid)
-            } else {
+            } else if passwordValidation {
                 confirmPasswordTextField.isEnabled = true
                 passwordValidationFlag = true
             }
         }
         if textField == confirmPasswordTextField, password != confirmPassword, confirmPassword.count >= 1 {
             showAlertViewController(alert: .passwordNotMatch)
-                alertIndicatorOnTextField(textField: passwordTextField)
-            }
+            Validation.alertIndicatorOnTextField(textField: passwordTextField)
+        }
         if passwordTextField.text == confirmPassword, passwordValidationFlag == true, emailValidationFlag == true, firstName.isEmpty == false, lastName.isEmpty == false {
             signUpButton.isEnabled = true
         }
@@ -179,5 +214,9 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func performSegue(identifier: SegueIdentifier) {
+        performSegue(withIdentifier: identifier.identifier, sender: self)
     }
 }

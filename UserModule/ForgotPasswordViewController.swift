@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ForgotPassWordPageViewController.swift
 //  UserModule
 //
 //  Created by Koushal Sharma on 29/06/17.
@@ -8,18 +8,13 @@
 
 import UIKit
 
-class FrontPageViewController: UIViewController {
+class ForgotPasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-    
-}
-
+  }
