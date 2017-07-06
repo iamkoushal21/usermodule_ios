@@ -397,6 +397,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAR-LQ-4Af">
                                 <rect key="frame" x="10" y="244" width="355" height="30"/>
                                 <state key="normal" title="Send New PassWord"/>
+                                <connections>
+                                    <action selector="sendNewPasswordButtonTapped:" destination="hub-Ad-jJe" eventType="touchUpInside" id="jgN-pb-ZI8"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCV-1n-xEE">
                                 <rect key="frame" x="10" y="314" width="355" height="30"/>
@@ -422,6 +425,9 @@
                             <constraint firstAttribute="trailing" secondItem="Wqg-9k-g4R" secondAttribute="trailing" constant="10" id="xsw-kc-7Yq"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailIdTextField" destination="ItY-7U-e1R" id="8gi-ym-CTd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BxK-JN-ehQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
